@@ -58,7 +58,7 @@ for i in $@; do
 		"-c") 
             Valid
             if [[ "$Flag" = true ]]; then
-		        CTypeProject
+            	CTypeProject
             fi ;;
 		"-cpp")
             Valid
