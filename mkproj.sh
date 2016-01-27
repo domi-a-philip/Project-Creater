@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ $# -eq 0 ]
   then
@@ -21,6 +21,16 @@ fi
 
 mkdir $PROJECTPATH
 
+Flag=false
+Valid () {
+    if [[ "$(ls -A $PROJECTPATH)" ]]; then
+        echo "A project for a language has already been initialized in the folder! Ignoring!"
+        Flag=false
+    else
+        Flag=true
+    fi    
+}
+
 CTypeProject ()	{
 	mkdir "$PROJECTPATH/src"
 	mkdir "$PROJECTPATH/bin"
@@ -41,14 +51,40 @@ InterpretedProject () {
 	mkdir "$PROJECTPATH/docs"
 }
 
+Valid
+
 for i in $@; do
 	case $i in
-		"-c") CTypeProject ;;
-		"-cpp") CTypeProject ;;
-		"-java") JavaProject ;;
-		"-py") InterpretedProject ;;
-		"-rb") InterpretedProject ;;
-		"-rails") cd $PROJECTPATH && rails new . ;;
+		"-c") 
+            Valid
+            if [[ "$Flag" = true ]]; then
+		        CTypeProject
+            fi ;;
+		"-cpp")
+            Valid
+            if [[ "$Flag" = true ]]; then
+                CTypeProject
+            fi ;;
+		"-java")
+            Valid
+            if [[ "$Flag" = true ]]; then
+                JavaProject
+            fi ;;
+		"-py")
+            Valid
+            if [[ "$Flag" = true ]]; then
+                InterpretedProject
+            fi ;;
+		"-rb")
+            Valid
+            if [[ "$Flag" = true ]]; then
+                InterpretedProject
+            fi ;;
+		"-rails")
+            Valid
+            if [[ "$Flag" = true ]]; then
+                cd $PROJECTPATH && rails new . 
+            fi ;;
 		"-vcs") git init --quiet $PROJECTPATH ;;
 		"-tags") cd $PROJECTPATH && ctags -R . ;;
 	esac	
