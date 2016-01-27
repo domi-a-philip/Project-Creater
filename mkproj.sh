@@ -138,3 +138,5 @@ for i in $@; do
 		"-tags") cd $PROJECTPATH && ctags -R . ;;
 	esac    
 done
+
+HooksCheck
