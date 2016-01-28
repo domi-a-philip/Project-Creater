@@ -52,56 +52,6 @@ InterpretedProject () {
 	mkdir "$PROJECTPATH/docs"
 }
 
-HooksCheck () {
-    isVCS=0
-    isTAGS=0
-    for i in "$@"; do
-        if [[ $i == "-vcs" ]] ; then
-            isVCS=1
-        fi
-        if [[ $i == "-tags" ]] ; then
-            isTAGS=1
-        fi
-    done
-
-    if [ $isVCS -eq 1 ] && [ $isTAGS -eq 1 ]; then
-        echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-checkout
-        echo -en '\n' >> $PROJECTPATH/.git/hooks/post-checkout
-        echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-checkout
-        chmod +x $PROJECTPATH/.git/hooks/post-checkout
-
-        echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-merge
-        echo -en '\n' >> $PROJECTPATH/.git/hooks/post-merge
-        echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-merge
-        chmod +x $PROJECTPATH/.git/hooks/post-merge
-
-        echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-receive
-        echo -en '\n' >> $PROJECTPATH/.git/hooks/post-receive
-        echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-receive
-        chmod +x $PROJECTPATH/.git/hooks/post-receive
-
-        echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-update
-        echo -en '\n' >> $PROJECTPATH/.git/hooks/post-update
-        echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-update
-        chmod +x $PROJECTPATH/.git/hooks/post-update
-
-        echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/pre-commit
-        echo -en '\n' >> $PROJECTPATH/.git/hooks/pre-commit
-        echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/pre-commit
-        chmod +x $PROJECTPATH/.git/hooks/pre-commit
-
-        echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/pre-push
-        echo -en '\n' >> $PROJECTPATH/.git/hooks/pre-push
-        echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/pre-push
-        chmod +x $PROJECTPATH/.git/hooks/pre-push
-
-        echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/update
-        echo -en '\n' >> $PROJECTPATH/.git/hooks/update
-        echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/update
-        chmod +x $PROJECTPATH/.git/hooks/update
-    fi
-}
-
 for i in $@; do
 	case $i in
 		"-c") 
@@ -139,4 +89,51 @@ for i in $@; do
 	esac    
 done
 
-HooksCheck
+isVCS=0
+isTAGS=0
+
+for i in $@; do
+    case $i in
+        "-vcs")
+            isVCS=1 ;;
+        "-tags")
+            isTAGS=1 ;;
+    esac
+done
+
+if [ $isVCS -eq 1 ] && [ $isTAGS -eq 1 ]; then
+    echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-checkout
+    echo -en '\n' >> $PROJECTPATH/.git/hooks/post-checkout
+    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-checkout
+    chmod +x $PROJECTPATH/.git/hooks/post-checkout
+
+    echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-merge
+    echo -en '\n' >> $PROJECTPATH/.git/hooks/post-merge
+    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-merge
+    chmod +x $PROJECTPATH/.git/hooks/post-merge
+
+    echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-receive
+    echo -en '\n' >> $PROJECTPATH/.git/hooks/post-receive
+    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-receive
+    chmod +x $PROJECTPATH/.git/hooks/post-receive
+
+    echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-update
+    echo -en '\n' >> $PROJECTPATH/.git/hooks/post-update
+    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-update
+    chmod +x $PROJECTPATH/.git/hooks/post-update
+
+    echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/pre-commit
+    echo -en '\n' >> $PROJECTPATH/.git/hooks/pre-commit
+    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/pre-commit
+    chmod +x $PROJECTPATH/.git/hooks/pre-commit
+
+    echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/pre-push
+    echo -en '\n' >> $PROJECTPATH/.git/hooks/pre-push
+    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/pre-push
+    chmod +x $PROJECTPATH/.git/hooks/pre-push
+
+    echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/update
+    echo -en '\n' >> $PROJECTPATH/.git/hooks/update
+    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/update
+    chmod +x $PROJECTPATH/.git/hooks/update
+fi
