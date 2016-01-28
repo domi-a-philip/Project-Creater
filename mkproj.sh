@@ -84,8 +84,12 @@ for i in $@; do
             if [[ "$Flag" = true ]]; then
                 cd $PROJECTPATH && rails new . 
             fi ;;
-		"-vcs") git init --quiet $PROJECTPATH ;;
-		"-tags") cd $PROJECTPATH && ctags -R . ;;
+		"-vcs") 
+            git init --quiet $PROJECTPATH ;;
+		"-tags") 
+            cd $PROJECTPATH && ctags -R . ;;
+        *)
+            echo "Error '$i' is not a valid argument." ;;
 	esac    
 done
 
