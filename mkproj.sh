@@ -52,6 +52,10 @@ InterpretedProject () {
 	mkdir "$PROJECTPATH/docs"
 }
 
+WebProject () {
+
+}
+
 for i in $@; do
 	case $i in
 		"-c") 
@@ -78,6 +82,11 @@ for i in $@; do
             Valid
             if [[ "$Flag" = true ]]; then
                 InterpretedProject
+            fi ;;
+        "-sails")
+            Valid
+            if [[ "$Flag" = true ]]; then
+                cd $PROJECTPATH && sails new .
             fi ;;
 		"-rails")
             Valid
