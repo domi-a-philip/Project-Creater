@@ -117,36 +117,36 @@ done
 if [ $isVCS -eq 1 ] && [ $isTAGS -eq 1 ]; then
     echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-checkout
     echo -en '\n' >> $PROJECTPATH/.git/hooks/post-checkout
-    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-checkout
+    echo "ctags -R ." >> $PROJECTPATH/.git/hooks/post-checkout
     chmod +x $PROJECTPATH/.git/hooks/post-checkout
 
     echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-merge
     echo -en '\n' >> $PROJECTPATH/.git/hooks/post-merge
-    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-merge
+    echo "ctags -R ." >> $PROJECTPATH/.git/hooks/post-merge
     chmod +x $PROJECTPATH/.git/hooks/post-merge
 
     echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-receive
     echo -en '\n' >> $PROJECTPATH/.git/hooks/post-receive
-    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-receive
+    echo "ctags -R ." >> $PROJECTPATH/.git/hooks/post-receive
     chmod +x $PROJECTPATH/.git/hooks/post-receive
 
     echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-update
     echo -en '\n' >> $PROJECTPATH/.git/hooks/post-update
-    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/post-update
+    echo "ctags -R ." >> $PROJECTPATH/.git/hooks/post-update
     chmod +x $PROJECTPATH/.git/hooks/post-update
 
     echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/pre-commit
     echo -en '\n' >> $PROJECTPATH/.git/hooks/pre-commit
-    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/pre-commit
+    echo "ctags -R ." >> $PROJECTPATH/.git/hooks/pre-commit
     chmod +x $PROJECTPATH/.git/hooks/pre-commit
 
     echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/pre-push
     echo -en '\n' >> $PROJECTPATH/.git/hooks/pre-push
-    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/pre-push
+    echo "ctags -R ." >> $PROJECTPATH/.git/hooks/pre-push
     chmod +x $PROJECTPATH/.git/hooks/pre-push
 
     echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/update
     echo -en '\n' >> $PROJECTPATH/.git/hooks/update
-    echo "cd ../../ && ctags -R ." >> $PROJECTPATH/.git/hooks/update
+    echo "ctags -R ." >> $PROJECTPATH/.git/hooks/update
     chmod +x $PROJECTPATH/.git/hooks/update
 fi
