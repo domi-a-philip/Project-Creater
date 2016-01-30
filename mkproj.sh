@@ -126,6 +126,8 @@ for i in $@; do
 done
 
 if [ $isVCS -eq 1 ] && [ $isTAGS -eq 1 ]; then
+    echo "tags" >> $PROJECTPATH/.git/info/exclude
+
     echo "#!/bin/sh" >> $PROJECTPATH/.git/hooks/post-checkout
     echo -en '\n' >> $PROJECTPATH/.git/hooks/post-checkout
     echo "ctags -R ." >> $PROJECTPATH/.git/hooks/post-checkout
