@@ -89,7 +89,7 @@ for i in $@; do
             if [[ "$Flag" = true ]]; then
                 InterpretedProject
             fi ;;
-        "-js")
+        "-web")
             Valid
             if [[ "$Flag" = true ]]; then
                 WebProject
