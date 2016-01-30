@@ -53,7 +53,10 @@ InterpretedProject () {
 }
 
 WebProject () {
-
+    mkdir "$PROJECTPATH/src"
+    mkdir "$PROJECTPATH/assets"
+    mkdir "$PROJECTPATH/style"
+    cd "$PROJECTPATH" && touch "index.html"
 }
 
 for i in $@; do
@@ -82,6 +85,11 @@ for i in $@; do
             Valid
             if [[ "$Flag" = true ]]; then
                 InterpretedProject
+            fi ;;
+        "-js")
+            Valid
+            if [[ "$Flag" = true ]]; then
+                WebProject
             fi ;;
         "-sails")
             Valid
