@@ -55,6 +55,9 @@ InterpretedProject () {
 WebProject () {
     mkdir "$PROJECTPATH/src"
     mkdir "$PROJECTPATH/assets"
+    mkdir -p "$PROJECTPATH/assets/fonts"
+    mkdir -p "$PROJECTPATH/assets/images"
+    mkdir -p "$PROJECTPATH/assets/sounds"
     mkdir "$PROJECTPATH/style"
     cd "$PROJECTPATH" && touch "index.html"
 }
